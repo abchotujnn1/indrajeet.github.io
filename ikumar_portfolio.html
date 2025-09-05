@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        /* Social Links Styling */
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-links a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+
+        /* Platform-specific hover colors */
+        .social-links a[title="LinkedIn"]:hover {
+            background: #0077b5;
+        }
+
+        .social-links a[title="GitHub"]:hover {
+            background: #333;
+        }
+
+        .social-links a[title="Medium"]:hover {
+            background: #00ab6c;
+        }
+
+        .social-links a[title="Email"]:hover {
+            background: #ea4335;
+        }
+
+        .social-links a[title="Twitter"]:hover {
+            background: #1da1f2;
+        }
+
+        /* Main Content */
+        .main-content {
+            background: white;
+            border-radius: 20px 20px 0 0;
+            margin-top: -50px;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .section {
+            padding: 4rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .profile-image {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #666;
+        }
+
+        /* Resume Section */
+        .resume-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .resume-item {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .resume-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .resume-item h3 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .resume-item .company {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .resume-item .date {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .resume-item ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .resume-item li {
+            padding: 0.25rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .resume-item li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+        }
+
+        /* Blog Section */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .blog-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .blog-image {
+            height: 200px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .blog-content {
+            padding: 2rem;
+        }
+
+        .blog-card h3 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .blog-card p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .read-more {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .read-more:hover {
+            color: #764ba2;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .skill-category i {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .skill-category h3 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .skill-tag {
+            background: #667eea;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #666;
+        }
+
+        .contact-item i {
+            color: #667eea;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .resume-content {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .section {
+                padding: 2rem 0;
+            }
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Add to Resume button */
+        .add-item-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 1rem 0;
+            transition: transform 0.3s ease;
+        }
+
+        .add-item-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Blog Add Button */
+        .add-blog-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .add-blog-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            width: 100%;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">Your Portfolio</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#resume">Resume</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Your Name</h1>
+            <p>Full Stack Developer | Tech Enthusiast | Problem Solver</p>
+            <div class="social-links">
+                <a href="https://linkedin.com/in/yourprofile" target="_blank" title="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://github.com/yourusername" target="_blank" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://medium.com/@yourusername" target="_blank" title="Medium">
+                    <i class="fab fa-medium"></i>
+                </a>
+                <a href="mailto:your.email@gmail.com" title="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="container">
+                <h2 class="section-title">About Me</h2>
+                <div class="about-content">
+                    <div class="profile-image">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="about-text">
+                        <p>Welcome to my portfolio! I'm a passionate developer with a love for creating innovative solutions and sharing knowledge through writing. With expertise in modern web technologies, I enjoy building applications that make a difference.</p>
+                        <p>When I'm not coding, you can find me writing technical articles, contributing to open-source projects, or exploring the latest developments in technology. I believe in continuous learning and sharing knowledge with the community.</p>
+                        <p>Feel free to explore my work, read my latest blog posts, and get in touch if you'd like to collaborate on something exciting!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resume Section -->
+        <section id="resume" class="section">
+            <div class="container">
+                <h2 class="section-title">Resume</h2>
+                <button class="add-item-btn" onclick="openResumeModal()">
+                    <i class="fas fa-plus"></i> Add Experience
+                </button>
+                <div class="resume-content">
+                    <div class="experience-column">
+                        <h3 style="text-align: center; margin-bottom: 2rem; color: #333;">Experience</h3>
+                        <div id="experienceList">
+                            <div class="resume-item">
+                                <h3>Senior Frontend Developer</h3>
+                                <div class="company">Tech Company Inc.</div>
+                                <div class="date">2022 - Present</div>
+                                <ul>
+                                    <li>Led development of responsive web applications using React and TypeScript</li>
+                                    <li>Improved application performance by 40% through optimization techniques</li>
+                                    <li>Mentored junior developers and conducted code reviews</li>
+                                </ul>
+                            </div>
+                            <div class="resume-item">
+                                <h3>Full Stack Developer</h3>
+                                <div class="company">StartUp Solutions</div>
+                                <div class="date">2020 - 2022</div>
+                                <ul>
+                                    <li>Built scalable web applications using Node.js and MongoDB</li>
+                                    <li>Implemented CI/CD pipelines and automated testing</li>
+                                    <li>Collaborated with cross-functional teams to deliver projects on time</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="education-column">
+                        <h3 style="text-align: center; margin-bottom: 2rem; color: #333;">Education & Skills</h3>
+                        <div class="resume-item">
+                            <h3>Bachelor of Computer Science</h3>
+                            <div class="company">University Name</div>
+                            <div class="date">2016 - 2020</div>
+                            <ul>
+                                <li>Graduated with honors</li>
+                                <li>Specialized in Software Engineering</li>
+                            </ul>
+                        </div>
+                        <div class="skills-grid">
+                            <div class="skill-category">
+                                <i class="fas fa-code"></i>
+                                <h3>Frontend</h3>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">React</span>
+                                    <span class="skill-tag">Vue.js</span>
+                                    <span class="skill-tag">TypeScript</span>
+                                </div>
+                            </div>
+                            <div class="skill-category">
+                                <i class="fas fa-server"></i>
+                                <h3>Backend</h3>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">Node.js</span>
+                                    <span class="skill-tag">Python</span>
+                                    <span class="skill-tag">MongoDB</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Section -->
+        <section id="blog" class="section">
+            <div class="container">
+                <h2 class="section-title">Latest Blog Posts</h2>
+                <button class="add-blog-btn" onclick="openBlogModal()">
+                    <i class="fas fa-plus"></i> Add Blog Post
+                </button>
+                <div class="blog-grid" id="blogGrid">
+                    <div class="blog-card">
+                        <div class="blog-image">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="blog-content">
+                            <h3>Getting Started with React Hooks</h3>
+                            <p>A comprehensive guide to understanding and implementing React Hooks in your applications...</p>
+                            <div class="blog-meta">
+                                <span>Dec 15, 2024</span>
+                                <a href="#" class="read-more">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blog-card">
+                        <div class="blog-image">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div class="blog-content">
+                            <h3>Optimizing Web Performance</h3>
+                            <p>Learn the best practices for improving your website's loading speed and user experience...</p>
+                            <div class="blog-meta">
+                                <span>Nov 28, 2024</span>
+                                <a href="#" class="read-more">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blog-card">
+                        <div class="blog-image">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div class="blog-content">
+                            <h3>Database Design Patterns</h3>
+                            <p>Exploring common database design patterns and when to use them in your projects...</p>
+                            <div class="blog-meta">
+                                <span>Nov 10, 2024</span>
+                                <a href="#" class="read-more">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="container">
+                <h2 class="section-title">Get In Touch</h2>
+                <div class="contact-content">
+                    <p>I'm always open to discussing new opportunities, interesting projects, or just having a chat about technology!</p>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>your.email@gmail.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+1 (555) 123-4567</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Your City, Country</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Your Name. All rights reserved. Built with ❤️ and hosted on GitHub Pages.</p>
+        </div>
+    </footer>
+
+    <!-- Resume Modal -->
+    <div id="resumeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeResumeModal()">&times;</span>
+            <h2>Add Experience</h2>
+            <form id="resumeForm">
+                <div class="form-group">
+                    <label for="jobTitle">Job Title:</label>
+                    <input type="text" id="jobTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="company">Company:</label>
+                    <input type="text" id="company" required>
+                </div>
+                <div class="form-group">
+                    <label for="duration">Duration:</label>
+                    <input type="text" id="duration" placeholder="e.g., 2020 - 2022" required>
+                </div>
+                <div class="form-group">
+                    <label for="responsibilities">Responsibilities (one per line):</label>
+                    <textarea id="responsibilities" placeholder="Enter each responsibility on a new line" required></textarea>
+                </div>
+                <button type="submit" class="btn-primary">Add Experience</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Blog Modal -->
+    <div id="blogModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeBlogModal()">&times;</span>
+            <h2>Add Blog Post</h2>
+            <form id="blogForm">
+                <div class="form-group">
+                    <label for="blogTitle">Title:</label>
+                    <input type="text" id="blogTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="blogExcerpt">Excerpt:</label>
+                    <textarea id="blogExcerpt" placeholder="Brief description of the post" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="blogDate">Date:</label>
+                    <input type="date" id="blogDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="blogUrl">URL (optional):</label>
+                    <input type="url" id="blogUrl" placeholder="https://medium.com/@yourpost">
+                </div>
+                <button type="submit" class="btn-primary">Add Blog Post</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Sample data storage
+        let experiences = [
+            {
+                title: "Senior Frontend Developer",
+                company: "Tech Company Inc.",
+                duration: "2022 - Present",
+                responsibilities: [
+                    "Led development of responsive web applications using React and TypeScript",
+                    "Improved application performance by 40% through optimization techniques",
+                    "Mentored junior developers and conducted code reviews"
+                ]
+            },
+            {
+                title: "Full Stack Developer",
+                company: "StartUp Solutions",
+                duration: "2020 - 2022",
+                responsibilities: [
+                    "Built scalable web applications using Node.js and MongoDB",
+                    "Implemented CI/CD pipelines and automated testing",
+                    "Collaborated with cross-functional teams to deliver projects on time"
+                ]
+            }
+        ];
+
+        let blogPosts = [
+            {
+                title: "Getting Started with React Hooks",
+                excerpt: "A comprehensive guide to understanding and implementing React Hooks in your applications...",
+                date: "2024-12-15",
+                url: "#"
+            },
+            {
+                title: "Optimizing Web Performance",
+                excerpt: "Learn the best practices for improving your website's loading speed and user experience...",
+                date: "2024-11-28",
+                url: "#"
+            },
+            {
+                title: "Database Design Patterns",
+                excerpt: "Exploring common database design patterns and when to use them in your projects...",
+                date: "2024-11-10",
+                url: "#"
+            }
+        ];
+
+        // Modal functions
+        function openResumeModal() {
+            document.getElementById('resumeModal').style.display = 'block';
+        }
+
+        function closeResumeModal() {
+            document.getElementById('resumeModal').style.display = 'none';
+            document.getElementById('resumeForm').reset();
+        }
+
+        function openBlogModal() {
+            document.getElementById('blogModal').style.display = 'block';
+        }
+
+        function closeBlogModal() {
+            document.getElementById('blogModal').style.display = 'none';
+            document.getElementById('blogForm').reset();
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const resumeModal = document.getElementById('resumeModal');
+            const blogModal = document.getElementById('blogModal');
+            if (event.target === resumeModal) {
+                closeResumeModal();
+            }
+            if (event.target === blogModal) {
+                closeBlogModal();
+            }
+        }
+
+        // Add experience
+        document.getElementById('resumeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const title = document.getElementById('jobTitle').value;
+            const company = document.getElementById('company').value;
+            const duration = document.getElementById('duration').value;
+            const responsibilities = document.getElementById('responsibilities').value.split('\n').filter(r => r.trim());
+
+            const newExperience = {
+                title,
+                company,
+                duration,
+                responsibilities
+            };
+
+            experiences.unshift(newExperience);
+            renderExperiences();
+            closeResumeModal();
+        });
+
+        // Add blog post
+        document.getElementById('blogForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const title = document.getElementById('blogTitle').value;
+            const excerpt = document.getElementById('blogExcerpt').value;
+            const date = document.getElementById('blogDate').value;
+            const url = document.getElementById('blogUrl').value || '#';
+
+            const newPost = {
+                title,
+                excerpt,
+                date,
+                url
+            };
+
+            blogPosts.unshift(newPost);
+            renderBlogPosts();
+            closeBlogModal();
+        });
+
+        // Render functions
+        function renderExperiences() {
+            const experienceList = document.getElementById('experienceList');
+            experienceList.innerHTML = experiences.map(exp => `
+                <div class="resume-item">
+                    <h3>${exp.title}</h3>
+                    <div class="company">${exp.company}</div>
+                    <div class="date">${exp.duration}</div>
+                    <ul>
+                        ${exp.responsibilities.map(resp => `<li>${resp}</li>`).join('')}
+                    </ul>
+                </div>
+            `).join('');
+        }
+
+        function renderBlogPosts() {
+            const blogGrid = document.getElementById('blogGrid');
+            blogGrid.innerHTML = blogPosts.map(post => {
+                const icon = getIconForBlogType(post.type);
+                const platformText = getPlatformText(post.type);
+                const formattedDate = new Date(post.date).toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'short', 
+                    day: 'numeric' 
+                });
+                
+                return `
+                    <div class="blog-card">
+                        <div class="blog-image">
+                            <i class="${icon}"></i>
+                        </div>
+                        <div class="blog-content">
+                            <h3>${post.title}</h3>
+                            <p>${post.excerpt}</p>
+                            <div class="blog-meta">
+                                <span>${formattedDate} • ${platformText}</span>
+                                <a href="${post.url}" target="_blank" class="read-more">
+                                    ${post.type === 'markdown' ? 'View on GitHub' : 'Read More'}
+                                    <i class="fas fa-external-link-alt" style="margin-left: 0.5rem; font-size: 0.8rem;"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function getIconForBlogType(type) {
+            switch(type) {
+                case 'markdown': return 'fab fa-markdown';
+                case 'medium': return 'fab fa-medium';
+                case 'dev': return 'fab fa-dev';
+                default: return 'fas fa-blog';
+            }
+        }
+
+        function getPlatformText(type) {
+            switch(type) {
+                case 'markdown': return 'Markdown';
+                case 'medium': return 'Medium';
+                case 'dev': return 'Dev.to';
+                default: return 'Blog';
+            }
+        }
