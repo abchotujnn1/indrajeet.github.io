@@ -582,22 +582,22 @@
 
         /* Markdown content styles */
         .markdown-content {
-            display: none;
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease, opacity 0.3s ease;
+            transition: max-height 0.4s ease-in-out;
             opacity: 0;
         }
 
         .markdown-content.expanded {
-            display: block;
-            max-height: 2000px;
+            max-height: 10000px;
             opacity: 1;
+            overflow: visible;
         }
 
         .markdown-content zero-md {
             --zmd-text-color: #333;
             --zmd-link-color: #667eea;
+            display: block;
         }
     </style>
 </head>
