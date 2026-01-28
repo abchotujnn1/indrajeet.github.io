@@ -1063,6 +1063,38 @@
                 default: return 'Blog';
             }
         }
+
+        // Fetch Medium articles
+        async function fetchMediumArticles() {
+            try {
+                const username = 'indrajeetkumar.iitbhu14';
+                const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@${username}`;
+                
+                const response = await fetch(rssUrl);
+                const data = await response.json();
+                
+                if (data.items) {
+                    const mediumPosts = data.items.slice(0, 5).map(item => ({
+                        title: item.title,
+                        excerpt: item.description.replace(/<[^>]*>/g, '').substring(0, 150) + '...',
+                        date: new Date(item.pubDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
+                        url: item.link,
+                        type: 'medium'
+                    }));
+                    
+                    blogPosts = [...mediumPosts, ...blogPosts];
+                    renderBlogPosts();
+                }
+            } catch (error) {
+                console.log('Medium articles could not be loaded');
+            }
+        }
+
+        // Load Medium articles on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchMediumArticles();
+        });
+        
         // Toggle markdown content visibility
         function toggleMarkdown(event) {
             event.preventDefault();
