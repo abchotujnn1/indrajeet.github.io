@@ -1064,54 +1064,39 @@
             }
         }
 
-        // Fetch Medium articles from URLs
-        async function fetchMediumArticles() {
-            try {
-                // Array of Medium article URLs to fetch
-                const mediumUrls = [
-                    'https://medium.com/@indrajeetkumar.iitbhu14/building-an-mcp-style-server-client-from-scratch-with-pipes-and-popen-be24d5206b49',
-                ];
-                
-                console.log('Fetching Medium articles from URLs...');
-                
-                const mediumPosts = [];
-                
-                for (const url of mediumUrls) {
-                    try {
-                        const response = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${url}`);
-                        const data = await response.json();
-                        
-                        if (data.items && data.items.length > 0) {
-                            const item = data.items[0];
-                            mediumPosts.push({
-                                title: item.title,
-                                excerpt: item.description ? item.description.replace(/<[^>]*>/g, '').substring(0, 150) + '...' : item.title,
-                                date: new Date(item.pubDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
-                                url: url,
-                                type: 'medium'
-                            });
-                        }
-                    } catch (error) {
-                        console.error('Error fetching URL:', url, error);
-                    }
-                }
-                
-                if (mediumPosts.length > 0) {
-                    console.log('Medium posts fetched:', mediumPosts);
-                    blogPosts = [...mediumPosts, ...blogPosts];
-                    renderBlogPosts();
-                } else {
-                    console.log('No Medium articles found');
-                }
-            } catch (error) {
-                console.error('Error in fetchMediumArticles:', error);
+        // Medium articles - manually defined with URL list
+        const mediumArticles = [
+            {
+                title: "Building an MCP-style Server-Client from Scratch with Pipes and Popen",
+                excerpt: "Learn how to build a Model Context Protocol style server-client architecture using Python pipes and subprocess communication...",
+                date: "2024-12-15",
+                url: "https://medium.com/@indrajeetkumar.iitbhu14/building-an-mcp-style-server-client-from-scratch-with-pipes-and-popen-be24d5206b49",
+                type: 'medium'
+            },
+            {
+                title: "Understanding the Relationship Between Discrete and Continuous Probability Distributions",
+                excerpt: "Explore the key differences and relationships between discrete and continuous probability distributions in statistics and data science...",
+                date: "2024-12-10",
+                url: "https://medium.com/@indrajeetkumar.iitbhu14/understanding-the-relationship-between-discrete-and-continuous-probability-distributions-b7b8597f7ab2",
+                type: 'medium'
+            }
+        ];
+
+        function loadMediumArticles() {
+            console.log('Loading Medium articles...');
+            if (mediumArticles.length > 0) {
+                console.log('Medium posts loaded:', mediumArticles);
+                blogPosts = [...mediumArticles, ...blogPosts];
+                renderBlogPosts();
+            } else {
+                console.log('No Medium articles configured');
             }
         }
 
         // Load Medium articles on page load
         window.addEventListener('load', function() {
-            console.log('Page loaded, fetching Medium articles...');
-            fetchMediumArticles();
+            console.log('Page loaded, loading Medium articles...');
+            loadMediumArticles();
         });
         
         // Toggle markdown content visibility
