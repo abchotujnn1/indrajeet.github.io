@@ -577,6 +577,26 @@
         .btn-primary:hover {
             transform: translateY(-2px);
         }
+
+        /* Markdown content styles */
+        .markdown-content {
+            display: none;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .markdown-content.expanded {
+            display: block;
+            max-height: 1000px;
+            opacity: 1;
+        }
+
+        .markdown-content zero-md {
+            --zmd-text-color: #333;
+            --zmd-link-color: #667eea;
+        }
     </style>
 </head>
 <body>
@@ -730,9 +750,11 @@
                             <p>A comprehensive guide to understanding and implementing React Hooks in your applications...</p>
                             <div class="blog-meta">
                                 <span>Dec 15, 2024</span>
-                                <a href="README.md" class="read-more">Read More</a>
+                                <a href="javascript:void(0)" class="read-more" onclick="toggleMarkdown(event)">Read More</a>
                             </div>
-                            <zero-md src="README.md" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #eee;"></zero-md>
+                            <div class="markdown-content" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #eee;">
+                                <zero-md src="README.md"></zero-md>
+                            </div>
                         </div>
                     </div>
                     <div class="blog-card">
@@ -1034,3 +1056,20 @@
                 default: return 'Blog';
             }
         }
+        // Toggle markdown content visibility
+        function toggleMarkdown(event) {
+            event.preventDefault();
+            const readMoreLink = event.target.closest('.read-more');
+            const markdownContent = readMoreLink.closest('.blog-content').querySelector('.markdown-content');
+            markdownContent.classList.toggle('expanded');
+            
+            // Change link text based on state
+            if (markdownContent.classList.contains('expanded')) {
+                readMoreLink.textContent = 'Show Less';
+            } else {
+                readMoreLink.textContent = 'Read More';
+            }
+        }
+    </script>
+</body>
+</html>
