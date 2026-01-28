@@ -1027,10 +1027,15 @@
                     day: 'numeric' 
                 });
                 
+                // Use image if available, otherwise show icon with gradient background
+                const imageHTML = post.image 
+                    ? `<img src="${post.image}" alt="${post.title}" style="width: 100%; height: 100%; object-fit: cover;">`
+                    : `<i class="${icon}"></i>`;
+                
                 return `
                     <div class="blog-card">
                         <div class="blog-image">
-                            <i class="${icon}"></i>
+                            ${imageHTML}
                         </div>
                         <div class="blog-content">
                             <h3>${post.title}</h3>
@@ -1073,14 +1078,16 @@
                 excerpt: "Learn how to build a Model Context Protocol style server-client architecture using Python pipes and subprocess communication...",
                 date: "2024-12-15",
                 url: "https://medium.com/@indrajeetkumar.iitbhu14/building-an-mcp-style-server-client-from-scratch-with-pipes-and-popen-be24d5206b49",
-                type: 'medium'
+                type: 'medium',
+                image: "https://miro.medium.com/v2/resize:fit:1200/format:webp/1*example1.png"
             },
             {
                 title: "Understanding the Relationship Between Discrete and Continuous Probability Distributions",
                 excerpt: "Explore the key differences and relationships between discrete and continuous probability distributions in statistics and data science...",
                 date: "2024-12-10",
                 url: "https://medium.com/@indrajeetkumar.iitbhu14/understanding-the-relationship-between-discrete-and-continuous-probability-distributions-b7b8597f7ab2",
-                type: 'medium'
+                type: 'medium',
+                image: "https://miro.medium.com/v2/resize:fit:1200/format:webp/1*example2.png"
             }
         ];
 
